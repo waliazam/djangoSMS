@@ -12,9 +12,7 @@
                             <h3 class="mb-4 pb-2">Calculator</h3>
                             <form method ="post">
                                {% csrf_token %} 
-
-                                <label>Value 1</label>
-                               
+                                <label>Value 1</label>                          
                                 <input type ="text" name ="value1" class = "form-control">
                                 <label>Select Operator</label>
                                 <select name ="opr" class = "form-comtrol">
@@ -23,7 +21,7 @@
                                     <option value = "*">*</option>
                                     <option value = "/">/</option>
                                 </select>
-
+                                
                                 <label>Value 2</label>
                                 <input type ="text" name ="value2" class = "form-control">
 

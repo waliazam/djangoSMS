@@ -1,9 +1,31 @@
 from django.http import HttpResponse , HttpResponseRedirect
 from django.shortcuts import render , redirect
 from .forms import usersForm
+from service.models import Service
+from news.models import news
 
 def homePage(request):
-    return render(request, "index.html")
+    newsData = news.objects.all();
+    ServiceData = Service.objects.all().order_by('-service_title')[:3]
+    
+    if request.method == "GET":
+        st = request.GET.get('servicesearch')
+        if st!=None:
+            ServiceData = Service.objects.filter(service_title__icontains=st)
+    data ={
+        'serviceData': ServiceData,
+        'newsData': newsData
+    }
+    return render(request, "index.html", data)
+
+def newsdetail(request, slug):
+    newsdetail = news.objects.get(news_slug=slug)
+    
+    data = {
+        'newsdetail': newsdetail
+    }
+    return render(request, "newsdetail.html", data)
+
 
 def topicslisting(requset):
     return render(requset, "topics-listing.html")

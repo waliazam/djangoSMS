@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.homePage),
     path('topics-listing.html', views.topicslisting),
     path('contact.html', views.contact),
-    path('calculator.html', views.calculator)
+    path('calculator.html', views.calculator),
+    path('newsdetail.html/<slug>', views.newsdetail, name="newsdetail")
     
 ]

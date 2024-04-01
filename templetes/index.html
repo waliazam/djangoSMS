@@ -1,63 +1,13 @@
 {% extends "base.html" %}
     {% block content %}
         <main>
-
-            <nav class="navbar navbar-expand-lg">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">
-                        <i class="bi-back"></i>
-                        <span>Topic</span>
-                    </a>
-
-                    <div class="d-lg-none ms-auto me-4">
-                        <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
-                    </div>
-    
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-    
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_1">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_2">Browse Topics</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_3">How it works</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_4">FAQs</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link click-scroll" href="#section_5">Contact</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                    <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <div class="d-none d-lg-block">
-                            <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            
-
+            <section class="mur">
+                <marquee onmouseover = "stop()" onmouseout="start()">
+                    {% for news in newsData %}
+                    <a href="{% url 'newsdetail' slug=news.news_slug %}">{{ news.news_title }}</a>   
+                    {% endfor %}
+                </marquee>
+            </section>
             <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
                 <div class="container">
                     <div class="row">
@@ -74,7 +24,7 @@
                                     </span>
 
                                     <input name="keyword" type="search" class="form-control" id="keyword" placeholder="Design, Code, Marketing, Finance ..." aria-label="Search">
-
+                                    
                                     <button type="submit" class="form-control">Search</button>
                                 </div>
                             </form>
@@ -83,8 +33,8 @@
                     </div>
                 </div>
             </section>
-
-
+          
+            
             <section class="featured-section">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -134,7 +84,7 @@
 
                                             <li class="social-icon-item">
                                                 <a href="#" class="social-icon-link bi-facebook"></a>
-                                            </li>Designms-auto"></a>
+                                            
                                     </div>
 
                                     <div class="section-overlay"></div>
@@ -148,7 +98,7 @@
 
 
             <section class="explore-section section-padding" id="section_2">
-                <div class="container">Design
+                <div class="container">
 
                         <div class="col-12 text-center">
                             <h2 class="mb-4">Browse Topics</h1>
@@ -158,6 +108,14 @@
                 </div>
 
                 <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form method="get">
+                                <input type="input" name="servicesearch" value="Search">
+                                <button type="submit" value="search">Search</button>
+                            </form>
+                        </div>
+                    </row>
                     <div class="row">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -190,14 +148,15 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabindex="0">
                                     <div class="row">
+                                        {% for design in serviceData %}
                                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                             <div class="custom-block bg-white shadow-lg">
                                                 <a href="topics-detail.html">
                                                     <div class="d-flex">
                                                         <div>
-                                                            <h5 class="mb-2">Web Design</h5>
+                                                            <h5 class="mb-2">{{design.service_title}}</h5>
 
-                                                            <p class="mb-0">Topic Listing Template based on Bootstrap 5</p>
+                                                            <p class="mb-0">{{design.service_des | truncatewords:6 | safe}}</p>
                                                         </div>
 
                                                         <span class="badge bg-design rounded-pill ms-auto">14</span>
@@ -207,8 +166,10 @@
                                                 </a>
                                             </div>
                                         </div>
-
-                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                        {% empty %}
+                                            No record found
+                                        {% endfor %}
+                                        {% comment %} <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                             <div class="custom-block bg-white shadow-lg">
                                                 <a href="topics-detail.html">
                                                     <div class="d-flex">
@@ -242,7 +203,7 @@
                                                     <img src="/static/images/topics/colleagues-working-cozy-office-medium-shot.png" class="custom-block-image img-fluid" alt="">
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div>
                                 </div>
 

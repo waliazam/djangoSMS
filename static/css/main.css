@@ -1,4 +1,7 @@
-teacher{
-color: red;
 
+.mur{
+    background-color: rgb(67, 160, 206);
 }
+marquee{ color: aliceblue};
+
+marquee .mur a{ color: white !important; }
