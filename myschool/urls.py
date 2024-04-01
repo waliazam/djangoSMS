@@ -21,9 +21,8 @@ from myschool import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homePage),
-    path('about/', views.about),
-    path('contact/', views.contact),
-    path('course/', views.course),
-    path('course/<courseId>', views.courseDetails)
+    path('topics-listing.html', views.topicslisting),
+    path('contact.html', views.contact),
+    path('calculator.html', views.calculator)
     
 ]

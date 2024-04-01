@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+    {% block content %}
+
+        <main>
+
+            {% include "nav.html" %}
+
+            <section class="section-padding section-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <h3 class="mb-4 pb-2">Calculator</h3>
+                            <form method ="post">
+                               {% csrf_token %} 
+
+                                <label>Value 1</label>
+                               
+                                <input type ="text" name ="value1" class = "form-control">
+                                <label>Select Operator</label>
+                                <select name ="opr" class = "form-comtrol">
+                                    <option value = "+">+</option>
+                                    <option value = "-">-</option>
+                                    <option value = "*">*</option>
+                                    <option value = "/">/</option>
+                                </select>
+
+                                <label>Value 2</label>
+                                <input type ="text" name ="value2" class = "form-control">
+
+                                <button type="submit" class =" btn btn-primary pt10">Calculate</button>
+                            </br>
+                                <label>Output</label>
+                                 <p>The sum is: {{c}}</p> 
+                                 <p>The sum is: {{c}} which is an {{check}} number</p> 
+
+                                
+                            </form>
+
+                        </div>
+                    </div>  
+                </div>
+            </section>
+        </main>
+        {% endblock content %}
